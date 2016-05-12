@@ -1,0 +1,113 @@
+{
+	"id": "95f14553-ca37-2ebf-3835-12f014e2c776",
+	"name": "AFIP API",
+	"description": "",
+	"order": [
+		"d4e8cf61-01c4-5103-244b-3086b8ea54a5",
+		"a042db86-2b19-4141-3083-484d0c2ea3e4",
+		"108308a8-40a6-87ec-4bc6-42705468d8b8"
+	],
+	"folders": [],
+	"timestamp": 1462845813387,
+	"owner": "4534",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "108308a8-40a6-87ec-4bc6-42705468d8b8",
+			"headers": "",
+			"url": "http://localhost:3000/api/wsfev1/FEParamGetTiposTributos",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "auth[key]",
+					"value": "Auth",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "params[Auth][cuit]",
+					"value": "00000000000",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1463020485706,
+			"name": "Endpoint FEParamGetTiposTributos",
+			"description": "",
+			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
+			"responses": []
+		},
+		{
+			"id": "a042db86-2b19-4141-3083-484d0c2ea3e4",
+			"headers": "",
+			"url": "http://localhost:3000/api/wsfev1/FEDummy",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "auth[key]",
+					"value": "Auth",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Auth[cuit]",
+					"value": "00000000000",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1463020478938,
+			"name": "Endpoint FEDummy",
+			"description": "",
+			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
+			"responses": []
+		},
+		{
+			"id": "d4e8cf61-01c4-5103-244b-3086b8ea54a5",
+			"headers": "",
+			"url": "http://localhost:3000/api/wsfev1/describe",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "auth[key]",
+					"value": "Auth",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Auth[cuit]",
+					"value": "00000000000",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1463020465165,
+			"name": "http://localhost:5060/api/wsfev1/describe",
+			"description": "",
+			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
+			"responses": []
+		}
+	]
+}

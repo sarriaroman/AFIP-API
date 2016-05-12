@@ -1,0 +1,24 @@
+{
+	"node": true,
+	"browser": true,
+	"esnext": true,
+	"bitwise": true,
+	"camelcase": false,
+	"curly": true,
+	"eqeqeq": false,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"regexp": true,
+	"undef": true,
+	"unused": true,
+	"trailing": true,
+	"smarttabs": true,
+	"white": true,
+	"globals": {},
+	"predef": [
+		"global",
+		"module"
+	]
+}
