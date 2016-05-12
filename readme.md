@@ -1,6 +1,8 @@
 
 # AFIP API simplificada  
 
+La función principal de este API es simplificar el acceso a los WebServices de AFIP y principalmente Factura Electrónica. Para generar los certificados y darse de alta en el Servicio de Homologación (Pruebas) usar esta web: (AFIP WS)[http://www.afip.gob.ar/ws]  
+
 ### Pasos para hacer funcionar el API  
 1) Desde el root ```npm install```  
 2) Desde el root correr ```./tools/keygen.sh /C=AR/O=Nombre Desarrollador/CN=Nombre Desarrollador/serialNumber=CUIT 00000000000```  
