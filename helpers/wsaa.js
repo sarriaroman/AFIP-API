@@ -2,7 +2,6 @@
 
 var fs = require('fs'),
 	soap = require('soap'),
-	keystone = require('keystone'),
 	moment = require('moment'),
 	xml2js = require('xml2js'),
 	parseString = xml2js.parseString,
@@ -70,8 +69,8 @@ class Tokens {
 	openssl_pkcs7_sign(data, callback) {
 		SignHelper.sign({
             content: data,
-            key: global.keys.private, //keystone.get('keys_private') + 'cas.key',
-            cert: global.keys.public //keystone.get('keys') + 'cas.pem'
+            key: global.keys.private,
+            cert: global.keys.public
         }).catch(function (err) {
             callback(err);
         }).then(function (result) {

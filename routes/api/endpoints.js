@@ -41,6 +41,7 @@ class Endpoints {
 
 			this.createClientForService(service).then((client) => {
 				var params = {};
+				console.info(req.body);
 
 				params[`${req.body.auth.key}`] = {
 					//Token: tokens.token,
@@ -61,6 +62,9 @@ class Endpoints {
 						res.json(result);
 					}
 				});
+			}).catch(err => {
+				console.info(err);
+				res.json({ result: false });
 			});
 
 		}).catch((err) => {

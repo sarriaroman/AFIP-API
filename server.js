@@ -11,6 +11,6 @@ global.keys = {
 // Start Routes
 index(app);
 
-app.listen(3000, function () {
-  console.log('AFIP API Corriendo en el puerto 3000');
+app.listen(process.env.PORT || 3000, function () {
+  console.log('AFIP API Corriendo en el puerto ' + ( process.env.PORT || 3000 ));
 });

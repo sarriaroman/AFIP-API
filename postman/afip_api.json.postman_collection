@@ -1,22 +1,22 @@
 {
 	"id": "95f14553-ca37-2ebf-3835-12f014e2c776",
-	"name": "AFIP API",
+	"name": "CASFe",
 	"description": "",
 	"order": [
 		"d4e8cf61-01c4-5103-244b-3086b8ea54a5",
 		"a042db86-2b19-4141-3083-484d0c2ea3e4",
-		"108308a8-40a6-87ec-4bc6-42705468d8b8"
+		"108308a8-40a6-87ec-4bc6-42705468d8b8",
+		"a0c496e8-ba18-6900-e8ff-db77adf87aef"
 	],
 	"folders": [],
-	"timestamp": 1462845813387,
+	"timestamp": 0,
 	"owner": "4534",
-	"remoteLink": "",
 	"public": false,
 	"requests": [
 		{
 			"id": "108308a8-40a6-87ec-4bc6-42705468d8b8",
 			"headers": "",
-			"url": "http://localhost:3000/api/wsfev1/FEParamGetTiposTributos",
+			"url": "http://localhost:5000/api/wsfev1/FEParamGetTiposTributos",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "POST",
@@ -25,65 +25,128 @@
 					"key": "auth[key]",
 					"value": "Auth",
 					"type": "text",
-					"enabled": true
+					"enabled": true,
+					"warning": ""
 				},
 				{
-					"key": "params[Auth][cuit]",
+					"key": "params[Auth][Cuit]",
 					"value": "00000000000",
 					"type": "text",
-					"enabled": true
+					"enabled": true,
+					"warning": ""
+				},
+				{
+					"key": "auth[token]",
+					"value": "Token",
+					"type": "text",
+					"enabled": true,
+					"warning": ""
+				},
+				{
+					"key": "auth[sign]",
+					"value": "Sign",
+					"type": "text",
+					"enabled": true,
+					"warning": ""
 				}
 			],
 			"dataMode": "urlencoded",
-			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1463020485706,
+			"time": 1481653556489,
 			"name": "Endpoint FEParamGetTiposTributos",
 			"description": "",
 			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
 			"responses": []
 		},
 		{
+			"folder": null,
 			"id": "a042db86-2b19-4141-3083-484d0c2ea3e4",
+			"name": "Endpoint FEDummy",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "auth[key]",
+					"value": "Auth",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Auth[Cuit]",
+					"value": "00000000000",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "",
 			"headers": "",
+			"method": "POST",
+			"pathVariables": {},
 			"url": "http://localhost:3000/api/wsfev1/FEDummy",
 			"preRequestScript": null,
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
-				{
-					"key": "auth[key]",
-					"value": "Auth",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "Auth[cuit]",
-					"value": "00000000000",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1463020478938,
-			"name": "Endpoint FEDummy",
-			"description": "",
-			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
-			"responses": []
+			"helperAttributes": "{}",
+			"responses": [],
+			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776"
 		},
 		{
-			"id": "d4e8cf61-01c4-5103-244b-3086b8ea54a5",
+			"id": "a0c496e8-ba18-6900-e8ff-db77adf87aef",
 			"headers": "",
-			"url": "http://localhost:3000/api/wsfev1/describe",
-			"preRequestScript": null,
+			"url": "http://localhost:5000/api/wsfev1/FECAEASolicitar",
 			"pathVariables": {},
-			"method": "GET",
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
+			"data": [
+				{
+					"key": "auth[key]",
+					"value": "Auth",
+					"type": "text",
+					"enabled": true,
+					"warning": ""
+				},
+				{
+					"key": "params[Auth][Cuit]",
+					"value": "00000000000",
+					"type": "text",
+					"enabled": true,
+					"warning": ""
+				},
+				{
+					"key": "auth[token]",
+					"value": "Token",
+					"type": "text",
+					"enabled": true,
+					"warning": ""
+				},
+				{
+					"key": "auth[sign]",
+					"value": "Sign",
+					"type": "text",
+					"enabled": true,
+					"warning": ""
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "Endpoint FECAEASolicitar",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1481653751667,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"folder": null,
+			"id": "d4e8cf61-01c4-5103-244b-3086b8ea54a5",
+			"name": "http://localhost:5060/api/wsfev1/describe",
+			"dataMode": "urlencoded",
 			"data": [
 				{
 					"key": "auth[key]",
@@ -92,22 +155,25 @@
 					"enabled": true
 				},
 				{
-					"key": "Auth[cuit]",
+					"key": "Auth[Cuit]",
 					"value": "00000000000",
 					"type": "text",
 					"enabled": true
 				}
 			],
-			"dataMode": "urlencoded",
-			"version": 2,
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "",
+			"headers": "",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "http://localhost:3000/api/wsfev1/describe",
+			"preRequestScript": null,
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1463020465165,
-			"name": "http://localhost:5060/api/wsfev1/describe",
-			"description": "",
-			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776",
-			"responses": []
+			"helperAttributes": "{}",
+			"responses": [],
+			"collectionId": "95f14553-ca37-2ebf-3835-12f014e2c776"
 		}
 	]
 }
