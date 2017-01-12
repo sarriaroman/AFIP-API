@@ -10,6 +10,8 @@ class Endpoints {
 	constructor(app) {
 		app.get('/api/:service/describe', this.describe.bind(this));
 
+		app.post('/api/:service/refresh/token', this.recreate_token.bind(this));
+
 		app.post('/api/:service/:endpoint', this.endpoint.bind(this));
 
 		this.clients = {};
@@ -33,10 +35,23 @@ class Endpoints {
 		});
 	}
 
+	recreate_token(req, res) {
+		var service = req.params.service;
+
+		WSAA.generateToken(service)
+			.then((tokens) => res.json(tokens))
+			.catch((err) => {
+				res.json({
+					result: false,
+					err: err.message
+				});
+			});
+	}
+
 	endpoint(req, res) {
 		var service = req.params.service;
 		var endpoint = req.params.endpoint;
-		
+
 		WSAA.generateToken(service).then((tokens) => {
 
 			this.createClientForService(service).then((client) => {
@@ -47,13 +62,13 @@ class Endpoints {
 					//Token: tokens.token,
 					//Sign: tokens.sign
 				};
-				
+
 				params[`${req.body.auth.key}`][`${req.body.auth.token}`] = tokens.token;
 				params[`${req.body.auth.key}`][`${req.body.auth.sign}`] = tokens.sign;
 
 				params = _.merge(params, req.body.params);
-				
-				//console.info(params);
+
+				console.info(params);
 
 				client[endpoint](params, (err, result) => {
 					try {

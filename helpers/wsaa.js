@@ -44,7 +44,7 @@ class Tokens {
 			if (this.cache[service] && this.cache[service].date) {
 				var hours = Math.abs((new Date()) - this.cache[service].date) / 36e5;
 
-				return (hours > 23);
+				return (hours > 12);
 			} else {
 				return true;
 			}
@@ -136,7 +136,7 @@ class Tokens {
 		});
 	}
 
-	generateToken(service) {
+	generateToken(service, refresh = false) {
 		// Parse some of the Services
 		if(service == 'wsfev1') {
 			service = 'wsfe';
@@ -144,7 +144,7 @@ class Tokens {
 		
 		return new Promise((resolve, reject) => {
 
-			if (this.isExpired(service)) {
+			if (this.isExpired(service) || refresh === true) {
 
 				this.createClient().then((client) => {
 
