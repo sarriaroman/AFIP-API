@@ -16,6 +16,10 @@
     "npm": ">=2.0.0"
   },
   "scripts": {
-    "start": "server.js"
+    "start": "server.js",
+    "debug": "nodemon --inspect=5858 server.js"
+  },
+  "devDependencies": {
+    "nodemon": "1.14.11"
   }
 }

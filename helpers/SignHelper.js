@@ -1,5 +1,5 @@
 var util = require('util'),
-	exec = require('child_process').exec;
+	spawn = require('child_process').spawn;
 
 // Expose methods.
 exports.sign = sign;
@@ -28,8 +28,7 @@ function sign(options) {
 			reject('Invalid certificate.');
 
 		var command = util.format(
-			'echo "%s" | openssl smime -sign -signer %s -inkey %s -outform DER -nodetach',
-			options.content.replace(/["']/g, '\\"'),
+			'openssl smime -sign -signer %s -inkey %s -outform DER -nodetach',
 			options.cert,
 			options.key
 		);
@@ -37,13 +36,24 @@ function sign(options) {
 		if (options.password)
 			command += util.format(' -passin pass:%s', options.password);
 
+		var args = command.split(' ');
+		var child = spawn(args[0], args.splice(1), { encoding: 'base64' });
 
-		exec(command, { encoding: 'base64' }, (error, stdout, stderr) => {
-			if (error || stderr) {
-				reject(stderr);
+		var der = [];
+
+		child.stdout.on('data', function (chunk) {
+			der.push(chunk);
+		});
+
+		child.on('close', function (code) {
+			if (code !== 0) {
+				reject(new Error('Process failed.'));
 			} else {
-				resolve(stdout);
+				resolve(Buffer.concat(der).toString('base64'));
 			}
 		});
+
+		child.stdin.write(options.content); //.replace(/["']/g, '\\"')
+		child.stdin.end();
 	});
 }
