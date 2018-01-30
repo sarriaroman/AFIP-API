@@ -5,7 +5,6 @@ var fs = require('fs'),
 	moment = require('moment'),
 	xml2js = require('xml2js'),
 	parseString = xml2js.parseString,
-	XmlBuild = require('xml'),
 	ntpClient = require('ntp-client'),
 	SignHelper = require('./SignHelper'),
 	AfipURLs = require('./urls');
@@ -68,14 +67,14 @@ class Tokens {
 
 	openssl_pkcs7_sign(data, callback) {
 		SignHelper.sign({
-            content: data,
-            key: global.keys.private,
-            cert: global.keys.public
-        }).catch(function (err) {
-            callback(err);
-        }).then(function (result) {
-            callback(null, result);
-        });
+			content: data,
+			key: global.keys.private,
+			cert: global.keys.public
+		}).catch(function (err) {
+			callback(err);
+		}).then(function (result) {
+			callback(null, result);
+		});
 	}
 
 	encryptXML(xml) {
@@ -115,21 +114,14 @@ class Tokens {
 
 				tomorrow.setMinutes(date.getMinutes());
 
-				var data = [{
-					loginTicketRequest: [
-						{ _attr: { version: '1.0' } }, {
-							header: [
-								{ uniqueId: moment().format('X') },
-								{ generationTime: this.formatDate(date) },
-								{ expirationTime: this.formatDate(tomorrow) }
-							]
-						}, {
-							service: service
-						}
-					]
-				}];
+				var xml = `<?xml version="1.0" encoding="UTF-8" ?><loginTicketRequest version="1.0"><header><uniqueId>{uniqueId}</uniqueId><generationTime>{generationTime}</generationTime><expirationTime>{expirationTime}</expirationTime></header><service>{service}</service></loginTicketRequest>`;
 
-				var xml = XmlBuild(data, { declaration: true });
+				xml = xml.replace('{uniqueId}', moment().format('X'));
+				xml = xml.replace('{generationTime}', this.formatDate(date));
+				xml = xml.replace('{expirationTime}', this.formatDate(tomorrow));
+				xml = xml.replace('{service}', service);
+
+				xml = xml.trim();
 
 				this.encryptXML(xml).then(resolve).catch(reject);
 			});
@@ -138,10 +130,10 @@ class Tokens {
 
 	generateToken(service, refresh = false) {
 		// Parse some of the Services
-		if(service == 'wsfev1') {
+		if (service == 'wsfev1') {
 			service = 'wsfe';
 		}
-		
+
 		return new Promise((resolve, reject) => {
 
 			if (this.isExpired(service) || refresh === true) {
