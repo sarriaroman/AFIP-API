@@ -7,7 +7,8 @@ var fs = require('fs'),
 	parseString = xml2js.parseString,
 	ntpClient = require('ntp-client'),
 	SignHelper = require('./SignHelper'),
-	AfipURLs = require('./urls');
+	AfipURLs = require('./urls'),
+	Cache = require('../cache');
 
 class Tokens {
 	constructor() {
@@ -16,7 +17,7 @@ class Tokens {
 
 		this.client = false;
 
-		this.cache = {};
+		this.cache = new Cache('tokens');
 	}
 
 	createClient() {
@@ -40,8 +41,9 @@ class Tokens {
 
 	isExpired(service) {
 		try {
-			if (this.cache[service] && this.cache[service].date) {
-				var hours = Math.abs((new Date()) - this.cache[service].date) / 36e5;
+			const cachedService = this.cache.getItem(service);
+			if (cachedService && cachedService.date) {
+				var hours = Math.abs((new Date()) - cachedService.date) / 36e5;
 
 				return (hours > 12);
 			} else {
@@ -153,10 +155,10 @@ class Tokens {
 										//console.info(res.loginticketresponse.header);
 										var credentials = res.loginticketresponse.credentials;
 
-										this.cache[service] = {
+										this.cache.setItem(service, {
 											date: new Date(),
 											credentials: credentials
-										};
+										});
 
 										resolve(credentials);
 									}).catch(reject);
@@ -170,7 +172,7 @@ class Tokens {
 				});
 
 			} else {
-				resolve(this.cache[service].credentials);
+				resolve(this.cache.getItem(service).credentials);
 			}
 
 		});
