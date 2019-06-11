@@ -109,12 +109,8 @@ class Tokens {
 	generateCMS(service) {
 		return new Promise((resolve, reject) => {
 			this.getCurrentTime().then((date) => {
-				var tomorrow = new Date();
-
 				// add a day
-				tomorrow.setDate(date.getDate() + 1);
-
-				tomorrow.setMinutes(date.getMinutes());
+				var tomorrow = moment(date).add(1, 'd')
 
 				var xml = `<?xml version="1.0" encoding="UTF-8" ?><loginTicketRequest version="1.0"><header><uniqueId>{uniqueId}</uniqueId><generationTime>{generationTime}</generationTime><expirationTime>{expirationTime}</expirationTime></header><service>{service}</service></loginTicketRequest>`;
 
