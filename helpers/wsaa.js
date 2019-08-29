@@ -1,6 +1,4 @@
-'use strict';
-
-var fs = require('fs'),
+const fs = require('fs'),
 	soap = require('soap'),
 	moment = require('moment'),
 	xml2js = require('xml2js'),

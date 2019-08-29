@@ -1,5 +1,3 @@
-'use strict';
-
 const afip_urls = {
 	HOMO: {
 		wsaa: 'https://wsaahomo.afip.gov.ar/ws/services/LoginCms?wsdl',
@@ -14,16 +12,16 @@ const afip_urls = {
 class AfipUrls {
 	constructor() {
 		this.urls = afip_urls.HOMO;
-		
-		if(!process.env.HOMO) {
+
+		if (!process.env.HOMO) {
 			this.urls = afip_urls.PROD;
 		}
 	}
-	
+
 	getWSAA() {
 		return this.urls.wsaa;
 	}
-	
+
 	getService(service) {
 		return this.urls.service.replace('{service}', service);
 	}

@@ -1,27 +1,32 @@
-const LocalStorage = require('node-localstorage').LocalStorage;
-const ser = require('node-serialize');
+const fs = require('fs'),
+	path = require('path');
 
 class Cache {
-  constructor(name) {
-    this.store = new LocalStorage(`./cache/${name}`);
-  }
+	constructor(name) {
+		this.storePath = path.join('.', 'cache', `${name}`);
+	}
 
-  getItem(key) {
-    let obj = this.store.getItem(key);
-    if (obj) {
-      return ser.unserialize(obj);
-    }
-  }
+	getItem(key) {
+		let obj = fs.readFileSync(this.storePath, 'utf8');
 
-  setItem(key, value) {
-    if (value) {
-      return this.store.setItem(key, ser.serialize(value));
-    }
-  }
+		if (obj && obj != '') {
+			return JSON.parse(obj);
+		}
 
-  clear() {
-    return this.store.clear();
-  }
+		return false;
+	}
+
+	setItem(key, value) {
+		if (value) {
+			return fs.writeFileSync(this.storePath, JSON.stringify(value));
+		}
+
+		return false;
+	}
+
+	clear() {
+		return fs.unlink(this.storePath);
+	}
 }
 
 module.exports = Cache;

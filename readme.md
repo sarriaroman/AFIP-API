@@ -25,3 +25,16 @@ La función principal de este API es simplificar el acceso a los WebServices de 
 2) Para realizar llamado ```/api/aqui_servicio/aqui_metodo```  
 2a) Servicio: ```wsfev1```  
 2b) Método: ```FEDummy```. Puede ser cualquiera de los obtenidos mediante describe.
+
+Versiones:
+
+__0.7.0:__  
+- Se elimina Express y se lo reemplaza por Restana para mayor performance.
+- Se agrega un handler para poder ser usado en ambientes serverless ( Requiere cambiar el servicio de Cache en estos ambientes )
+- La cache se basa en archivos y no librerias externas.
+- Se elimina Lodash.
+- El cambio a Restana permite utilizar HTTPS y HTTP/2
+- Mejoras en algunos métodos basadas en NodeJS 10+.
+- Se cambia la versión de Node a 10 como mínimo.
+- Se elimina la necesidad de Node-GYP
+  

@@ -1,7 +1,4 @@
-'use strict';
-
-var _ = require('lodash'),
-	soap = require('soap'),
+const soap = require('soap'),
 	WSAA = require('../../helpers/wsaa'),
 	AfipURLs = require('../../helpers/urls');
 
@@ -55,7 +52,7 @@ class Endpoints {
 		WSAA.generateToken(service).then((tokens) => {
 
 			this.createClientForService(service).then((client) => {
-				var params = {};
+				var params = { ...req.body.params };
 				console.info(req.body);
 
 				params[`${req.body.auth.key}`] = {
@@ -65,8 +62,6 @@ class Endpoints {
 
 				params[`${req.body.auth.key}`][`${req.body.auth.token}`] = tokens.token;
 				params[`${req.body.auth.key}`][`${req.body.auth.sign}`] = tokens.sign;
-
-				params = _.merge(params, req.body.params);
 
 				console.info(params);
 
