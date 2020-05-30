@@ -36,9 +36,9 @@ class Endpoints {
 		var service = req.params.service;
 
 		WSAA.generateToken(service)
-			.then((tokens) => res.json(tokens))
+			.then((tokens) => res.send(tokens))
 			.catch((err) => {
-				res.json({
+				res.send({
 					result: false,
 					err: err.message
 				});
@@ -67,18 +67,18 @@ class Endpoints {
 
 				client[endpoint](params, (err, result) => {
 					try {
-						res.json(result[`${endpoint}Result`]);
+						res.send(result[`${endpoint}Result`]);
 					} catch (e) {
-						res.json(result);
+						res.send(result);
 					}
 				});
 			}).catch(err => {
 				console.info(err);
-				res.json({ result: false });
+				res.send({ result: false });
 			});
 
 		}).catch((err) => {
-			res.json({
+			res.send({
 				result: false,
 				err: err.message
 			});
@@ -91,11 +91,11 @@ class Endpoints {
 		WSAA.generateToken(service).then((tokens) => {
 
 			this.createClientForService(service).then((client) => {
-				res.json(client.describe());
+				res.send(client.describe());
 			});
 
 		}).catch((err) => {
-			res.json({
+			res.send({
 				result: false,
 				err: err.message
 			});
