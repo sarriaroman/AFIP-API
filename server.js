@@ -16,10 +16,10 @@ global.keys = {
 	// Start Routes
 	index(app, false);
 
-	await app.start(process.env.PORT || 5000);
+	await app.start(process.env.PORT || 3000);
 
 	console.log(
 		"AFIP API Corriendo en el puerto " +
-			(process.env.PORT || 5000)
+			(process.env.PORT || 3000)
 	);
 })()
