@@ -16,7 +16,7 @@
 		"npm": ">=6.0.0"
 	},
 	"scripts": {
-		"start": "server.js",
+		"start": "node server.js",
 		"debug": "nodemon --inspect=5858 server.js",
 		"dev": "HOMO=true node server.js"
 	},
