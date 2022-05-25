@@ -55,10 +55,11 @@ class Endpoints {
 				var params = { ...req.body.params };
 				console.info(req.body);
 
-				params[`${req.body.auth.key}`] = {
-					//Token: tokens.token,
-					//Sign: tokens.sign
-				};
+				if (params[`${req.body.auth.key}`] === undefined)
+					params[`${req.body.auth.key}`] = {
+						//Token: tokens.token,
+						//Sign: tokens.sign
+					};
 
 				params[`${req.body.auth.key}`][`${req.body.auth.token}`] = tokens.token;
 				params[`${req.body.auth.key}`][`${req.body.auth.sign}`] = tokens.sign;
