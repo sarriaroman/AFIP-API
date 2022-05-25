@@ -1,0 +1,133 @@
+{
+    "info": {
+        "_postman_id": "95f14553-ca37-2ebf-3835-12f014e2c776",
+        "name": "CASFe",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "http://localhost:5060/api/wsfev1/describe",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "auth[key]",
+                            "value": "Auth",
+                            "type": "text"
+                        },
+                        {
+                            "key": "Auth[Cuit]",
+                            "value": "00000000000",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": "http://localhost:3000/api/wsfev1/describe"
+            },
+            "response": []
+        },
+        {
+            "name": "Endpoint FEDummy",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "auth[key]",
+                            "value": "Auth",
+                            "type": "text"
+                        },
+                        {
+                            "key": "Auth[Cuit]",
+                            "value": "00000000000",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": "http://localhost:3000/api/wsfev1/FEDummy"
+            },
+            "response": []
+        },
+        {
+            "name": "Endpoint FEParamGetTiposTributos",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "auth[key]",
+                            "value": "Auth",
+                            "type": "text",
+                            "warning": ""
+                        },
+                        {
+                            "key": "params[Auth][Cuit]",
+                            "value": "00000000000",
+                            "type": "text",
+                            "warning": ""
+                        },
+                        {
+                            "key": "auth[token]",
+                            "value": "Token",
+                            "type": "text",
+                            "warning": ""
+                        },
+                        {
+                            "key": "auth[sign]",
+                            "value": "Sign",
+                            "type": "text",
+                            "warning": ""
+                        }
+                    ]
+                },
+                "url": "http://localhost:5000/api/wsfev1/FEParamGetTiposTributos"
+            },
+            "response": []
+        },
+        {
+            "name": "Endpoint FECAEASolicitar",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "auth[key]",
+                            "value": "Auth",
+                            "type": "text",
+                            "warning": ""
+                        },
+                        {
+                            "key": "params[Auth][Cuit]",
+                            "value": "00000000000",
+                            "type": "text",
+                            "warning": ""
+                        },
+                        {
+                            "key": "auth[token]",
+                            "value": "Token",
+                            "type": "text",
+                            "warning": ""
+                        },
+                        {
+                            "key": "auth[sign]",
+                            "value": "Sign",
+                            "type": "text",
+                            "warning": ""
+                        }
+                    ]
+                },
+                "url": "http://localhost:5000/api/wsfev1/FECAEASolicitar"
+            },
+            "response": []
+        }
+    ]
+}
