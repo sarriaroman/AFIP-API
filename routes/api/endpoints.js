@@ -1,6 +1,7 @@
 const soap = require('soap'),
-	WSAA = require('../../helpers/wsaa'),
-	AfipURLs = require('../../helpers/urls');
+	{Tokens} = require('../../helpers/Tokens'),
+	AfipURLs = require('../../helpers/urls'),
+	tokenCollection = new Tokens();
 
 class Endpoints {
 
@@ -11,20 +12,19 @@ class Endpoints {
 
 		app.post('/api/:service/:endpoint', this.endpoint.bind(this));
 
-		this.clients = {};
+		this.clients = new Map();
 	}
 
 	createClientForService(service) {
 		return new Promise((resolve, reject) => {
-			if (this.clients[service]) {
-				resolve(this.clients[service]);
+			if (this.clients.has(service)) {
+				resolve(this.clients.get(service));
 			} else {
 				soap.createClient(AfipURLs.getService(service), (err, client) => {
 					if (err && !client) {
 						reject(err);
 					} else {
-						this.clients[service] = client;
-
+						this.clients.set(client);
 						resolve(client);
 					}
 				});
@@ -32,24 +32,24 @@ class Endpoints {
 		});
 	}
 
-	recreate_token(req, res) {
+	async recreate_token(req, res) {
 		var service = req.params.service;
 
-		WSAA.generateToken(service)
-			.then((tokens) => res.send(tokens))
+		const tokens = await tokenCollection.get(service)
 			.catch((err) => {
 				res.send({
 					result: false,
 					err: err.message
 				});
+				throw err
 			});
+		res.send(tokens)
 	}
-
 	async endpoint(req, res) {
 		var service = req.params.service;
 		var endpoint = req.params.endpoint;
 
-		const tokens = await WSAA.generateToken(service).catch((err) => {
+		const tokens = await tokenCollection.get(service).catch((err) => {
 			res.send({
 				result: false,
 				err: err.message

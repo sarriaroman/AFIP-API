@@ -128,7 +128,7 @@ class Tokens {
 		});
 	}
 
-	generateToken(service, refresh = false) {
+	get(service, refresh = false) {
 		// Parse some of the Services
 		if (service == 'wsfev1') {
 			service = 'wsfe';
@@ -177,4 +177,6 @@ class Tokens {
 	}
 }
 
-module.exports = new Tokens();
+module.exports = {
+	Tokens
+};
