@@ -45,62 +45,55 @@ class Endpoints {
 			});
 	}
 
-	endpoint(req, res) {
+	async endpoint(req, res) {
 		var service = req.params.service;
 		var endpoint = req.params.endpoint;
 
-		WSAA.generateToken(service).then((tokens) => {
-
-			this.createClientForService(service).then((client) => {
-				var params = { ...req.body.params };
-				console.info(req.body);
-
-				if (params[`${req.body.auth.key}`] === undefined)
-					params[`${req.body.auth.key}`] = {
-						//Token: tokens.token,
-						//Sign: tokens.sign
-					};
-
-				params[`${req.body.auth.key}`][`${req.body.auth.token}`] = tokens.token;
-				params[`${req.body.auth.key}`][`${req.body.auth.sign}`] = tokens.sign;
-
-				console.info(params);
-
-				client[endpoint](params, (err, result) => {
-					try {
-						res.send(result[`${endpoint}Result`]);
-					} catch (e) {
-						res.send(result);
-					}
-				});
-			}).catch(err => {
-				console.info(err);
-				res.send({ result: false });
-			});
-
-		}).catch((err) => {
+		const tokens = await WSAA.generateToken(service).catch((err) => {
 			res.send({
 				result: false,
 				err: err.message
 			});
+			throw err
 		});
+
+		const client = await this.createClientForService(service).catch(err => {
+			console.error(err);
+			res.send({ result: false });
+			throw err;
+		});
+
+		var params = { ...req.body.params };
+		console.info(req.body);
+
+		if (params[`${req.body.auth.key}`] === undefined)
+			params[`${req.body.auth.key}`] = {};
+
+		params[`${req.body.auth.key}`][`${req.body.auth.token}`] = tokens.token;
+		params[`${req.body.auth.key}`][`${req.body.auth.sign}`] = tokens.sign;
+
+		console.info(params);
+
+		client[endpoint](params, (err, result) => {
+			try {
+				res.send(result[`${endpoint}Result`]);
+			} catch (e) {
+				res.send(result);
+				throw e;
+			}
+		});
+
+
 	}
 
-	describe(req, res) {
+	async describe(req, res) {
 		var service = req.params.service;
 
-		WSAA.generateToken(service).then((tokens) => {
+		const client = await this.createClientForService(service);
 
-			this.createClientForService(service).then((client) => {
-				res.send(client.describe());
-			});
+		res.send(client.describe());
 
-		}).catch((err) => {
-			res.send({
-				result: false,
-				err: err.message
-			});
-		});
+
 	}
 
 }
