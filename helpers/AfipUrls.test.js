@@ -16,7 +16,7 @@ describe('AfipUrls', () => {
   });
 
   describe('wsaa', () => {
-    it('should return the WSAA URL', () => {
+    it('should return the prod WSAA URL', () => {
       expect(AfipUrls.wsaa).toBe(AFIP_URLS.PROD.wsaa);
     });
   });
