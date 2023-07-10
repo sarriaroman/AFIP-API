@@ -1,6 +1,6 @@
 const soap = require('soap'),
-	{Tokens} = require('../../helpers/Tokens'),
-	AfipURLs = require('../../helpers/urls'),
+	{ Tokens } = require('../../helpers/Tokens'),
+	{ AfipUrls } = require('../../helpers/AfipUrls'),
 	tokenCollection = new Tokens();
 
 class Endpoints {
@@ -20,7 +20,7 @@ class Endpoints {
 			if (this.clients.has(service)) {
 				resolve(this.clients.get(service));
 			} else {
-				soap.createClient(AfipURLs.getService(service), (err, client) => {
+				soap.createClient(AfipUrls.getService(service), (err, client) => {
 					if (err && !client) {
 						reject(err);
 					} else {

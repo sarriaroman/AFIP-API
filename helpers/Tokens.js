@@ -5,7 +5,7 @@ const fs = require('fs'),
 	parseString = xml2js.parseString,
 	ntpClient = require('ntp-client'),
 	SignHelper = require('./SignHelper'),
-	AfipURLs = require('./urls'),
+	{ AfipURLs } = require('./AfipUrls'),
 	Cache = require('../cache');
 
 class Tokens {
